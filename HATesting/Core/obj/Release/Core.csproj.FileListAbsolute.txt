@@ -1,0 +1,14 @@
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\Drivers\chromedriver.exe
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\Core.dll.config
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\Core.dll
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\Core.pdb
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\nunit.framework.dll
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\WebDriver.dll
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\WebDriver.Support.dll
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\nunit.framework.xml
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\WebDriver.xml
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\bin\Release\WebDriver.Support.xml
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\obj\Release\Core.Properties.Resources.resources
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\obj\Release\Core.csproj.GenerateResource.Cache
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\obj\Release\Core.dll
+C:\Users\sbondare\Documents\TaskInterview\HATesting\Core\obj\Release\Core.pdb
