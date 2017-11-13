@@ -2,13 +2,14 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.Configuration;
 
 namespace Core.TCs
-{    
+{
     public class BaseTestCase
-    {        
+    {
         protected IWebDriver driver;
         protected GeneralVerifications generalVerificationsAceptance = new GeneralVerifications();
         private string baseUrl = ConfigurationManager.AppSettings["TargetUrl"];
@@ -30,23 +31,26 @@ namespace Core.TCs
         /// </summary>
         /// <returns></returns>
         private void CreateDriver()
-        {            
-                var driverToUse = Get<DriverToUse>("Driver");
+        {
+            var driverToUse = Get<DriverToUse>("Driver");
+            {
+                switch (driverToUse)
                 {
-                    switch (driverToUse)
-                    {
-                        case DriverToUse.Chrome:
-                            ChromeOptions chromeOptions = new ChromeOptions();
-                            chromeOptions.AddArguments("start-maximized");
-                            driver = new ChromeDriver(chromeOptions);
-                            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-                            break;
-                        default:
-                            throw new NotImplementedException();
-                    }
+                    case DriverToUse.Chrome:
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.AddArguments("start-maximized");
+                        driver = new ChromeDriver(chromeOptions);
+                        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                        break;
+                    case DriverToUse.Firefox:
+                        driver = new FirefoxDriver();
+                        break;
+                    default:
+                        throw new NotImplementedException();
                 }
+            }
 
-                driver.Navigate().GoToUrl(baseUrl);            
+            driver.Navigate().GoToUrl(baseUrl);
         }
 
         /// <summary>
