@@ -1,12 +1,17 @@
 ﻿using Core.POMs;
+using OpenQA.Selenium;
 
 namespace Core.TContexts
 {
     public class LoginPageContext : BaseContext
     {
-        public LoginPageContext() { }
 
-        public LoginPage LoginPage { get { return Instance<LoginPage>(); } }
+        public LoginPage LoginPage { get; private set; }
+
+        public LoginPageContext(IWebDriver driver) : base (driver)
+        {
+            LoginPage = new LoginPage(driver);
+        }        
         
         public LoginPageContext SetEMail(string email)
         {

@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace Core.POMs
 {
@@ -8,10 +10,11 @@ namespace Core.POMs
     /// </summary>
     public class LoginPage : BasePage 
     {
-        public LoginPage() : base()
-        {            
-            base.InitPageElements(this);
-        }
+        public LoginPage(IWebDriver driver) : base(driver)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementToBeClickable(this.ButtonSubmit));
+        }        
 
         [FindsBy(How = How.Id, Using = "email", Priority = 0)]        
         public IWebElement EMailField { get; set; }

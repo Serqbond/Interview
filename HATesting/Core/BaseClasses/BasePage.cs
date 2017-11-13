@@ -1,21 +1,16 @@
-﻿using Core.DriverWrapper;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Core.POMs
 {
     public class BasePage
     {
-        public BasePage() { }        
+        protected IWebDriver driver;
 
-        /// <summary>
-        /// Creates POM
-        /// </summary>
-        /// <param name="page"></param>
-        protected void InitPageElements(object page)
+        public BasePage(IWebDriver driver)
         {
-            PageFactory.InitElements(SeleniumDriver.OneDriver, page);
+            this.driver = driver;
+            PageFactory.InitElements(driver, this);
         }
-
-        
     }
 }

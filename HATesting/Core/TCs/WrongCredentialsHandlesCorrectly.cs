@@ -1,6 +1,4 @@
-﻿using Core.POMs;
-using Core.TContexts;
-using Core.Verification;
+﻿using Core.TContexts;
 using NUnit.Framework;
 
 namespace Core.TCs
@@ -14,19 +12,18 @@ namespace Core.TCs
             string email = "boo@gmail.com";
             string password = "123";            
             string expectedWarningMessage = @"Неверный адрес электронной почты или пароль. Попробуйте еще раз.";
-            GeneralVerifications acceptance = new GeneralVerifications();
-            LoginPage logPage = BaseContext.Instance<LoginPageContext>().LoginPage;
+            var LoginPageContext = new LoginPageContext(driver);
 
-            BaseContext.Instance<LoginPageContext>()
+            LoginPageContext
                 .SetEMail(email)
                 .SetPassword(password)
                 .ClickButtonSubmit()
-                .Verify<LoginPageContext>(() =>
+                .Verify(() =>
                 {
-                    acceptance.IsAlertMessageDisplayed(logPage.WrongCredsMessage, email);
-                    acceptance.IsMessageCorrect(logPage.WrongCredsMessage, expectedWarningMessage);
-                })
-                .Wait<LoginPageContext>(5000)
+                    generalVerificationsAceptance.IsAlertMessageDisplayed(LoginPageContext.LoginPage.WrongCredsMessage, email);
+                    generalVerificationsAceptance.IsMessageCorrect(LoginPageContext.LoginPage.WrongCredsMessage, expectedWarningMessage);
+                }, LoginPageContext)
+                .Wait<LoginPageContext>(LoginPageContext, 5000)
                 ;
         }
     }

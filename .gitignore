@@ -1,2 +1,5 @@
 /HATesting/Core/bin/*
 /HATesting/Core/obj/*
+/HATesting/packages
+/HATesting/packages/*
+/HATesting/packages/*

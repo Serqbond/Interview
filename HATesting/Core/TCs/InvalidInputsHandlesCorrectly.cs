@@ -12,41 +12,39 @@ namespace Core.TCs
         public void InvalidEmailEnterHandlesCorrectly()
         {
             List<string> invalidEmails = new List<string>() {"boo", "boo@gmail", "boo@gmail.com.com", "boo@boo@gmail.com"};
-            GeneralVerifications acceptance = new GeneralVerifications();
+            
             string expectedWarningMessage = @"Пожалуйста, введите корректный адрес электронной почты.";
+            var LoginPageContext = new LoginPageContext(driver);
 
-            BaseContext.Instance<LoginPageContext>()
-                .Each<LoginPageContext, string>(invalidEmails, email =>
-                    BaseContext.Instance<LoginPageContext>()
-                    .ClearEmail()
-                    .SetEMail(email)
-                    .SetPassword("boo")
-                    .Verify<LoginPageContext>(() =>
-                    {
-                        acceptance.IsAlertMessageDisplayed(BaseContext.Instance<LoginPageContext>().LoginPage.WrongEmailMessage, email); 
-                        acceptance.IsMessageCorrect(BaseContext.Instance<LoginPageContext>().LoginPage.WrongEmailMessage, expectedWarningMessage); 
-                    })
-                    .ClearPassword()
-                    )
-                                
-                .Wait<LoginPageContext>(5000)
+            LoginPageContext
+                .ClearEmail()
+                .SetEMail(invalidEmails[0])
+                .SetPassword("boo")
+                .Verify(() => generalVerificationsAceptance
+                .IsAlertMessageDisplayed(LoginPageContext.LoginPage.WrongEmailMessage, invalidEmails[0]), LoginPageContext)
+                .Verify(() => generalVerificationsAceptance
+                .IsMessageCorrect(LoginPageContext.LoginPage.WrongEmailMessage, expectedWarningMessage), LoginPageContext)
+                .ClearPassword()                  
+                .Wait(LoginPageContext, 5000)
                 ;
         }
 
         [Test]
         public void EmptyEmailHandlesCorrectly()
         {
-            string empty = string.Empty;
-            GeneralVerifications acceptance = new GeneralVerifications();
+            string empty = string.Empty;            
             string expectedWarningMessage = @"Это поле необходимо заполнить.";
+            var LoginPageContext = new LoginPageContext(driver);
 
-            BaseContext.Instance<LoginPageContext>()
+            LoginPageContext
                 .ClearEmail()
                 .SetEMail(empty)
                 .SetPassword("boo")
                 .ClickButtonSubmit()
-                .Verify<LoginPageContext>(() => acceptance.IsAlertMessageDisplayed(BaseContext.Instance<LoginPageContext>().LoginPage.WrongEmailMessage, empty))
-                .Verify<LoginPageContext>(() => acceptance.IsMessageCorrect(BaseContext.Instance<LoginPageContext>().LoginPage.WrongEmailMessage, expectedWarningMessage))
+                .Verify(() => generalVerificationsAceptance
+                .IsAlertMessageDisplayed(LoginPageContext.LoginPage.WrongEmailMessage, empty), LoginPageContext)
+                .Verify(() => generalVerificationsAceptance
+                .IsMessageCorrect(LoginPageContext.LoginPage.WrongEmailMessage, expectedWarningMessage), LoginPageContext)
                 ;
         }
     }
