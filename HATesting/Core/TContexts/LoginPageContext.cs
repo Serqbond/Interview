@@ -39,8 +39,13 @@ namespace Core.TContexts
         
         public LoginPageContext ClickButtonSubmit()
         {
-            this.LoginPage.ButtonSubmit.Click();
-            return this;
+            try
+            {
+                this.LoginPage.ButtonSubmit.Click();
+            }
+            catch { }
+
+            return new LoginPageContext(driver);
         }
     }
 }

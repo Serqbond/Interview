@@ -41,6 +41,7 @@ namespace Core.TCs
                         chromeOptions.AddArguments("start-maximized");
                         driver = new ChromeDriver(chromeOptions);
                         driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+                        driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
                         break;
                     case DriverToUse.Firefox:
                         driver = new FirefoxDriver();
@@ -50,7 +51,12 @@ namespace Core.TCs
                 }
             }
 
-            driver.Navigate().GoToUrl(baseUrl);
+            try
+            {
+                driver.Navigate().GoToUrl(baseUrl);
+            }
+            catch (OpenQA.Selenium.WebDriverTimeoutException e)
+            { }
         }
 
         /// <summary>
